@@ -16,7 +16,7 @@ class PedidoCompra {
         $this->fecha=$fecha;
     }
 
-    public function getFecProveedor(){
+    public function getProveedor(){
         return $this->proveedor;
     }
     public function setProveedor($prov){
@@ -44,7 +44,7 @@ class PedidoCompra {
         $this->pedidoCerrado=$pedc;
     }
 
-    public function setListaLineasCompras(){
+    public function getListaLineasCompras(){
         return $this->listaLineasCompras;
     }
     public function setLineaCompra($lc){
@@ -53,6 +53,26 @@ class PedidoCompra {
 
     public function mostrarInformacion(){
         
+        echo 'Fecha: ' . $this->getFecha() . '<br>';
+        echo 'Proveedor: ' . $this->getProveedor()->getDescripcion() . '<br>';
+        echo 'Fecha estimada de entrega: ' . $this->getFechaEstimada() . '<br>';
+        echo 'Costo total: ' . $this->getCostoTotal() . '<br>';
+        echo 'Pedido cerrado: ' . $this->getPedidoCerrado() . '<br>' . '<br>';
+        
+        foreach($this->getListaLineasCompras() as $linc)
+        {
+            echo 'Linea de compra' . '<br>';
+            echo 'Cantidad: ' . $linc->getCantidad() . '<br>';
+            echo 'Costo unitario: ' . $linc->getCostoUnitario() . '<br>';
+            echo 'Entregado: ' . $linc->getFueEntregado() . '<br>';
+            echo '<b>Producto:</b>'  . '<br>';
+            foreach($linc->getProducto() as $prod)
+            {
+                echo 'Codigo del producto: ' . $prod->getCodigo() . '<br>';
+                echo 'Descripción: ' . $prod->getDescripcion() . '<br>';
+                echo 'Precio de venta: ' . $prod->getPrecioVenta() . '<br>' . '<br>';
+            }
+        }
     }
 
 
